@@ -1,10 +1,7 @@
 package rendering;
 
-public class Environment implements Renderable {
+import input.InputHandler;
 
-    @Override
-    public void renderOn(final Java2DRenderer renderer) {
-
-    }
+public interface Environment extends Renderable, InputHandler {
 
 }
