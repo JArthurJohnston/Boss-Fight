@@ -7,7 +7,7 @@ public class Java2DRenderer {
 
     private final Frame frame;
     private final Graphics graphics;
-    private final BufferedImage renderingBuffer;
+    private final Image renderingBuffer;
     private final Graphics graphicsBuffer;
 
     public Java2DRenderer(final Frame frame) {
