@@ -1,9 +1,7 @@
 package rendering;
 
 import input.InputHandler;
-import input.InputMap;
 
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public abstract class Sprite implements InputHandler{

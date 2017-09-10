@@ -1,4 +1,4 @@
-import input.InputMap;
+import input.UserInputs;
 import rendering.*;
 
 import javax.imageio.ImageIO;
@@ -15,19 +15,42 @@ public class BossFight {
     private final Frame gameWindow;
     private final Java2DRenderer renderer;
     private final Environment environment;
-    private final input.InputMap inputMap;
+    private final UserInputs userInputs;
 
     private BossFight() {
         this.gameWindow = initFrame();
         this.renderer = new Java2DRenderer(this.gameWindow);
         this.environment = initEnvironment();
-        this.inputMap = new input.InputMap();
+        this.userInputs = new UserInputs();
     }
 
     private void loop() {
+        int fps = 0;
+        int updates = 0;
+        long timer = System.currentTimeMillis();
+        final double frameRate = 60.0;
+        long gameTick = System.nanoTime();
+        double frameRateInNanoSeconds = 1000000000.0 / frameRate;
+        double delta = 0;
         while (true) {
-            update();
+            long now = System.nanoTime();
+
+            delta += (now - gameTick) / frameRateInNanoSeconds;
+            gameTick = now;
+            while(delta >= 1){
+                updates++;
+                update();
+                delta--;
+            }
+            fps++;
             draw();
+            if(System.currentTimeMillis() - timer > 1000){
+                timer += 1000;
+                System.out.println("FPS: " + fps);
+                System.out.println("Updates : " + updates);
+                updates = 0;
+                fps = 0;
+            }
         }
     }
 
@@ -36,7 +59,7 @@ public class BossFight {
     }
 
     private void update(){
-        this.environment.updateWith(this.inputMap);
+        this.environment.updateWith(this.userInputs);
     }
 
     private Environment initEnvironment() {
@@ -47,7 +70,7 @@ public class BossFight {
             final Sprite sprite = new Sprite(spriteImage, 50, 50){
 
                 @Override
-                public void updateWith(InputMap map) {
+                public void updateWith(UserInputs map) {
                     final int maxVerticalValue = gameWindow.getHeight() - this.image.getHeight();
                     final int maxHoriontalValue = gameWindow.getWidth() - this.image.getWidth();
                     if(map.at(KeyEvent.VK_DOWN)){
@@ -77,8 +100,7 @@ public class BossFight {
 
             return new Environment() {
                 @Override
-                public void updateWith(input.InputMap map) {
-                    //theres an input map in swing.
+                public void updateWith(UserInputs map) {
                     sprite.updateWith(map);
                 }
 
@@ -94,7 +116,7 @@ public class BossFight {
             e.printStackTrace();
             return new Environment() {
                 @Override
-                public void updateWith(input.InputMap map) {
+                public void updateWith(UserInputs map) {
                     //NO-OP
                 }
 
@@ -121,13 +143,13 @@ public class BossFight {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.exit(0);
                 } else {
-                    inputMap.press(e.getKeyCode());
+                    userInputs.press(e.getKeyCode());
                 }
             }
 
             @Override
             public void keyReleased(final KeyEvent e) {
-                inputMap.release(e.getKeyCode());
+                userInputs.release(e.getKeyCode());
             }
         });
         final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

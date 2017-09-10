@@ -1,10 +1,10 @@
 package input;
 
-public class InputMap {
+public class UserInputs {
 
     boolean[] keyPressedMap;
 
-    public InputMap(){
+    public UserInputs(){
         keyPressedMap = new boolean[500];
     }
 
