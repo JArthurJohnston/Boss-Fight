@@ -1,10 +1,10 @@
-package rendering;
+package rendering.sprites;
 
 import input.InputHandler;
 
 import java.awt.image.BufferedImage;
 
-public abstract class Sprite implements InputHandler{
+public abstract class Sprite implements InputHandler {
 
     protected final BufferedImage image;
     protected int yPosition;

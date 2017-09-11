@@ -1,5 +1,7 @@
+import input.InputDirection;
 import input.UserInputs;
 import rendering.*;
+import rendering.sprites.Sprite;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -30,21 +32,21 @@ public class BossFight {
         long timer = System.currentTimeMillis();
         final double frameRate = 60.0;
         long gameTick = System.nanoTime();
-        double frameRateInNanoSeconds = 1000000000.0 / frameRate;
+        final double frameRateInNanoSeconds = 1000000000.0 / frameRate;
         double delta = 0;
         while (true) {
-            long now = System.nanoTime();
+            final long now = System.nanoTime();
 
             delta += (now - gameTick) / frameRateInNanoSeconds;
             gameTick = now;
-            while(delta >= 1){
+            while (delta >= 1) {
                 updates++;
                 update();
                 delta--;
             }
             fps++;
             draw();
-            if(System.currentTimeMillis() - timer > 1000){
+            if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
                 System.out.println("FPS: " + fps);
                 System.out.println("Updates : " + updates);
@@ -58,7 +60,7 @@ public class BossFight {
         this.environment.renderOn(this.renderer);
     }
 
-    private void update(){
+    private void update() {
         this.environment.updateWith(this.userInputs);
     }
 
@@ -67,32 +69,40 @@ public class BossFight {
             final BufferedImage backgroundImage = ImageIO.read(new File("./res/green_background.JPG"));
             final BufferedImage spriteImage = ImageIO.read(new File("./res/black mage.png"));
             final Background background = new Background(backgroundImage);
-            final Sprite sprite = new Sprite(spriteImage, 50, 50){
+            final Sprite sprite = new Sprite(spriteImage, 50, 50) {
 
                 @Override
-                public void updateWith(UserInputs map) {
-                    final int maxVerticalValue = gameWindow.getHeight() - this.image.getHeight();
-                    final int maxHoriontalValue = gameWindow.getWidth() - this.image.getWidth();
-                    if(map.at(KeyEvent.VK_DOWN)){
-                        this.yPosition += speed;
-                        if (this.yPosition > maxVerticalValue) {
-                            this.yPosition = maxVerticalValue;
-                        }
-                    }else if (map.at(KeyEvent.VK_UP)){
-                        this.yPosition -= speed;
-                        if (this.yPosition < 0) {
-                            this.yPosition = 0;
-                        }
-                    }else if (map.at(KeyEvent.VK_RIGHT)){
-                        this.xPosition += speed;
-                        if (this.xPosition > maxHoriontalValue) {
-                            this.xPosition = maxHoriontalValue;
-                        }
-                    }else if (map.at(KeyEvent.VK_LEFT)){
-                        this.xPosition -= speed;
-                        if (this.xPosition < 0) {
-                            this.xPosition = 0;
-                        }
+                public void updateWith(final UserInputs map) {
+                    final int maxVerticalValue = BossFight.this.gameWindow.getHeight() - this.image.getHeight();
+                    final int maxHoriontalValue = BossFight.this.gameWindow.getWidth() - this.image.getWidth();
+                    final InputDirection inputDirection = InputDirection.getDirectionFrom(map);
+                    switch (inputDirection) {
+                        case UP:
+                            this.yPosition -= this.speed;
+                            if (this.yPosition < 0) {
+                                this.yPosition = 0;
+                            }
+                            break;
+                        case DOWN:
+                            this.yPosition += this.speed;
+                            if (this.yPosition > maxVerticalValue) {
+                                this.yPosition = maxVerticalValue;
+                            }
+                            break;
+                        case LEFT:
+                            this.xPosition -= this.speed;
+                            if (this.xPosition < 0) {
+                                this.xPosition = 0;
+                            }
+                            break;
+                        case RIGHT:
+                            this.xPosition += this.speed;
+                            if (this.xPosition > maxHoriontalValue) {
+                                this.xPosition = maxHoriontalValue;
+                            }
+                            break;
+                        default:
+                            break;
                     }
                 }
             };
@@ -100,12 +110,12 @@ public class BossFight {
 
             return new Environment() {
                 @Override
-                public void updateWith(UserInputs map) {
+                public void updateWith(final UserInputs map) {
                     sprite.updateWith(map);
                 }
 
                 @Override
-                public void renderOn(Java2DRenderer renderer) {
+                public void renderOn(final Java2DRenderer renderer) {
                     renderer.addBackground(background)
                             .addSprite(sprite)
                             .render();
@@ -116,12 +126,12 @@ public class BossFight {
             e.printStackTrace();
             return new Environment() {
                 @Override
-                public void updateWith(UserInputs map) {
+                public void updateWith(final UserInputs map) {
                     //NO-OP
                 }
 
                 @Override
-                public void renderOn(Java2DRenderer renderer) {
+                public void renderOn(final Java2DRenderer renderer) {
                     //NO-OP
                 }
             };
@@ -143,13 +153,13 @@ public class BossFight {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     System.exit(0);
                 } else {
-                    userInputs.press(e.getKeyCode());
+                    BossFight.this.userInputs.press(e.getKeyCode());
                 }
             }
 
             @Override
             public void keyReleased(final KeyEvent e) {
-                userInputs.release(e.getKeyCode());
+                BossFight.this.userInputs.release(e.getKeyCode());
             }
         });
         final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

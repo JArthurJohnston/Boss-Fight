@@ -1,5 +1,7 @@
 package rendering;
 
+import rendering.sprites.Sprite;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
