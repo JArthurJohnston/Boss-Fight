@@ -17,7 +17,7 @@ public class SpriteMotion {
         this.speed = speed;
     }
 
-    void updatePosition(Sprite sprite, InputDirection direction){
+    public void updatePosition(Sprite sprite, InputDirection direction){
         switch (direction) {
             case UP:
                 sprite.yPosition -= this.speed;

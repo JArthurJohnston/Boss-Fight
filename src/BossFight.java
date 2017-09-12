@@ -1,7 +1,10 @@
 import input.InputDirection;
 import input.UserInputs;
 import rendering.*;
+import rendering.sprites.FourDirctionalSprite;
 import rendering.sprites.Sprite;
+import rendering.sprites.SpriteMotion;
+import rendering.sprites.SpriteSheet;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -69,49 +72,17 @@ public class BossFight {
             final BufferedImage backgroundImage = ImageIO.read(new File("./res/green_background.JPG"));
             final BufferedImage spriteImage = ImageIO.read(new File("./res/black mage.png"));
             final Background background = new Background(backgroundImage);
-            final Sprite sprite = new Sprite(spriteImage, 50, 50) {
-
-                @Override
-                public void updateWith(final UserInputs map) {
-                    final int maxVerticalValue = BossFight.this.gameWindow.getHeight() - this.image.getHeight();
-                    final int maxHoriontalValue = BossFight.this.gameWindow.getWidth() - this.image.getWidth();
-                    final InputDirection inputDirection = InputDirection.getDirectionFrom(map);
-                    switch (inputDirection) {
-                        case UP:
-                            this.yPosition -= this.speed;
-                            if (this.yPosition < 0) {
-                                this.yPosition = 0;
-                            }
-                            break;
-                        case DOWN:
-                            this.yPosition += this.speed;
-                            if (this.yPosition > maxVerticalValue) {
-                                this.yPosition = maxVerticalValue;
-                            }
-                            break;
-                        case LEFT:
-                            this.xPosition -= this.speed;
-                            if (this.xPosition < 0) {
-                                this.xPosition = 0;
-                            }
-                            break;
-                        case RIGHT:
-                            this.xPosition += this.speed;
-                            if (this.xPosition > maxHoriontalValue) {
-                                this.xPosition = maxHoriontalValue;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            };
+            SpriteMotion spriteMotion = new SpriteMotion(this.gameWindow.getWidth(), this.gameWindow.getHeight(), 3);
+            SpriteSheet spriteSheet = new SpriteSheet(spriteImage, 5, 4);
+            final Sprite sprite = new FourDirctionalSprite(50, 50, spriteSheet, 0, 0);
 
 
             return new Environment() {
                 @Override
                 public void updateWith(final UserInputs map) {
                     sprite.updateWith(map);
+                    InputDirection direction = InputDirection.getDirectionFrom(map);
+                    spriteMotion.updatePosition(sprite, direction);
                 }
 
                 @Override
