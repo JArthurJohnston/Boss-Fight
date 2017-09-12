@@ -10,7 +10,6 @@ public class SpriteImageStateMachine {
     private final Image spriteSheet;
     private final int gridX;
     private final int gridY;
-    private ImageState state;
 
     public SpriteImageStateMachine(final BufferedImage spriteSheet, final int gridX, final int gridY) {
 
@@ -20,26 +19,25 @@ public class SpriteImageStateMachine {
 
         final int spriteWidth = spriteSheet.getWidth() / gridX;
         final int spriteHeight = spriteSheet.getHeight() / gridY;
+    }
 
-        state = new ImageState(0,0) {
-            @Override
-            ImageState update(InputDirection direction) {
-                return null;
-            }
-        };
+    public void update(final InputDirection direction) {
+
     }
 
     private abstract class ImageState {
 
-        private int xPosition;
-        private int yPosition;
+        private final int xPosition;
+        private final int yPosition;
 
-        public ImageState(int xPosition, int yPosition){
+        public ImageState(final int xPosition, final int yPosition) {
             this.xPosition = xPosition;
             this.yPosition = yPosition;
         }
 
-        abstract ImageState update(InputDirection direction);
+        public void update(final InputDirection direction) {
+
+        }
 
     }
 }
