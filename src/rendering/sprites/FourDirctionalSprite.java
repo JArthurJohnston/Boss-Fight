@@ -30,8 +30,8 @@ public class FourDirctionalSprite extends Sprite {
         final InputDirection direction = InputDirection.getDirectionFrom(inputs);
         if (direction == this.direction) {
             this.gridX++;
-            if(gridX >= numberOfColumns){
-                gridX = 0;
+            if (this.gridX >= this.numberOfColumns) {
+                this.gridX = 0;
             }
         } else {
             this.gridX = 0;
