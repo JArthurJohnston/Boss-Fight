@@ -7,21 +7,17 @@ import java.awt.image.BufferedImage;
 
 public class FourDirctionalSprite extends Sprite {
 
-    private final int spriteWidth;
-    private final int spriteHeight;
     private final InputDirection direction;
-    private final int numberOfColumns;
+    private final SpriteSheet spriteSheet;
     private int gridX;
     private int gridY;
 
-    public FourDirctionalSprite(final BufferedImage image, final int xPosition, final int yPosition,
-                                final int numberOfColumns, final int numberOfRows, final int gridX, final int gridY) {
-        super(image, xPosition, yPosition);
+    public FourDirctionalSprite(final int xPosition, final int yPosition,
+                                SpriteSheet sheet, final int gridX, final int gridY) {
+        super(xPosition, yPosition);
+        this.spriteSheet = sheet;
         this.gridX = gridX;
         this.gridY = gridY;
-        this.numberOfColumns = numberOfColumns;
-        this.spriteWidth = image.getWidth() / this.numberOfColumns;
-        this.spriteHeight = image.getHeight() / numberOfRows;
         this.direction = InputDirection.DOWN;
     }
 
@@ -30,7 +26,7 @@ public class FourDirctionalSprite extends Sprite {
         final InputDirection direction = InputDirection.getDirectionFrom(inputs);
         if (direction == this.direction) {
             this.gridX++;
-            if (this.gridX >= this.numberOfColumns) {
+            if (this.gridX >= spriteSheet.getColumns()) {
                 this.gridX = 0;
             }
         } else {
@@ -55,8 +51,8 @@ public class FourDirctionalSprite extends Sprite {
 
     @Override
     public BufferedImage getImage() {
-        final int x = this.gridX * this.spriteWidth;
-        final int y = this.gridY * this.spriteHeight;
-        return this.image.getSubimage(x, y, this.spriteWidth, this.spriteHeight);
+        final int x = this.gridX * this.spriteSheet.getWidth();
+        final int y = this.gridY * this.spriteSheet.getHeight();
+        return this.spriteSheet.getSpriteAt(x, y);
     }
 }
