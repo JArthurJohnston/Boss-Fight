@@ -46,8 +46,6 @@ public class FourDirctionalSprite extends Sprite {
                     break;
                 default:
             }
-//            this.direction = direction;
-
     }
 
     @Override
