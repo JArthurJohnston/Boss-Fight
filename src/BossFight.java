@@ -70,7 +70,7 @@ public class BossFight {
     private Environment initEnvironment() {
         try {
             final BufferedImage backgroundImage = ImageIO.read(new File("./res/green_background.JPG"));
-            final BufferedImage spriteImage = ImageIO.read(new File("./res/black mage.png"));
+            final BufferedImage spriteImage = ImageIO.read(new File("./res/sprite_sheet.png"));
             final Background background = new Background(backgroundImage);
             SpriteMotion spriteMotion = new SpriteMotion(this.gameWindow.getWidth(), this.gameWindow.getHeight(), 3);
             SpriteSheet spriteSheet = new SpriteSheet(spriteImage, 5, 4);

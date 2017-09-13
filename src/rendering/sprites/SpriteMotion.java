@@ -1,7 +1,6 @@
 package rendering.sprites;
 
 import input.InputDirection;
-import input.UserInputs;
 
 public class SpriteMotion {
 

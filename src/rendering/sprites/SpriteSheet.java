@@ -21,22 +21,10 @@ public class SpriteSheet {
     public BufferedImage getSpriteAt(int row, int column){
         int xPosition = row * spriteWidth;
         int yPosition = column * spriteHeight;
-        return this.image.getSubimage(xPosition, yPosition, spriteWidth, spriteHeight);
+        return this.image.getSubimage(xPosition, yPosition, spriteHeight, spriteWidth);
     }
 
     public int getColumns() {
         return numberOfColumns;
-    }
-
-    public int getRows() {
-        return numberOfRows;
-    }
-
-    public int getWidth() {
-        return spriteWidth;
-    }
-
-    public int getHeight() {
-        return spriteHeight;
     }
 }
