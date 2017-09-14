@@ -1,6 +1,6 @@
-package rendering.sprites;
+package com.paratusSoftware.rendering.sprites;
 
-import input.InputHandler;
+import com.paratusSoftware.input.InputHandler;
 
 import java.awt.image.BufferedImage;
 

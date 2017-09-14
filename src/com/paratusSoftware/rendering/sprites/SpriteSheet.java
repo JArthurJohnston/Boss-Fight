@@ -1,4 +1,4 @@
-package rendering.sprites;
+package com.paratusSoftware.rendering.sprites;
 
 import java.awt.image.BufferedImage;
 

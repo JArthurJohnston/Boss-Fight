@@ -1,4 +1,4 @@
-package rendering;
+package com.paratusSoftware.rendering;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

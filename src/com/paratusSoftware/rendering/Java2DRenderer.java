@@ -1,6 +1,6 @@
-package rendering;
+package com.paratusSoftware.rendering;
 
-import rendering.sprites.Sprite;
+import com.paratusSoftware.rendering.sprites.Sprite;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

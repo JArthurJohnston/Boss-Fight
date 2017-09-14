@@ -1,6 +1,6 @@
-package rendering.sprites;
+package com.paratusSoftware.rendering.sprites;
 
-import input.InputDirection;
+import com.paratusSoftware.input.InputDirection;
 
 public class SpriteMotion {
 

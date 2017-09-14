@@ -1,7 +1,7 @@
-package rendering.sprites;
+package com.paratusSoftware.rendering.sprites;
 
-import input.InputDirection;
-import input.UserInputs;
+import com.paratusSoftware.input.InputDirection;
+import com.paratusSoftware.input.UserInputs;
 
 import java.awt.image.BufferedImage;
 

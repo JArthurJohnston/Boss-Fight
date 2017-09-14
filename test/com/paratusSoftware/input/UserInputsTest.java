@@ -1,4 +1,4 @@
-package input;
+package com.paratusSoftware.input;
 
 import org.junit.jupiter.api.Test;
 

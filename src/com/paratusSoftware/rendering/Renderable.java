@@ -1,4 +1,4 @@
-package rendering;
+package com.paratusSoftware.rendering;
 
 public interface Renderable {
 

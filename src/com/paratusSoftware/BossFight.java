@@ -1,10 +1,12 @@
-import input.InputDirection;
-import input.UserInputs;
-import rendering.*;
-import rendering.sprites.FourDirctionalSprite;
-import rendering.sprites.Sprite;
-import rendering.sprites.SpriteMotion;
-import rendering.sprites.SpriteSheet;
+package com.paratusSoftware;
+
+import com.paratusSoftware.input.InputDirection;
+import com.paratusSoftware.input.UserInputs;
+import com.paratusSoftware.rendering.*;
+import com.paratusSoftware.rendering.sprites.FourDirctionalSprite;
+import com.paratusSoftware.rendering.sprites.Sprite;
+import com.paratusSoftware.rendering.sprites.SpriteMotion;
+import com.paratusSoftware.rendering.sprites.SpriteSheet;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
