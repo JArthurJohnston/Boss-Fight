@@ -26,7 +26,7 @@ public class Java2DRenderer {
 
     public Java2DRenderer addSprite(final Sprite sprite) {
         final BufferedImage image = sprite.getImage();
-        this.graphicsBuffer.drawImage(image, sprite.getxPosition(), sprite.getyPosition(), this.frame);
+        this.graphicsBuffer.drawImage(image, sprite.getXPosition(), sprite.getYPosition(), this.frame);
         return this;
     }
 

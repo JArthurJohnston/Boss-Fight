@@ -10,16 +10,16 @@ public abstract class Sprite implements InputHandler {
     protected int xPosition;
 
     public Sprite(
-                  final int xPosition, final int yPosition) {
+            final int xPosition, final int yPosition) {
         this.yPosition = yPosition;
         this.xPosition = xPosition;
     }
 
-    public int getxPosition() {
+    public int getXPosition() {
         return this.xPosition;
     }
 
-    public int getyPosition() {
+    public int getYPosition() {
         return this.yPosition;
     }
 

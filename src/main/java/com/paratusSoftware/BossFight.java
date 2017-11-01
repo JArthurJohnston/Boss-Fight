@@ -74,8 +74,8 @@ public class BossFight {
             final BufferedImage backgroundImage = ImageIO.read(new File("./res/green_background.JPG"));
             final BufferedImage spriteImage = ImageIO.read(new File("./res/sprite_sheet.png"));
             final Background background = new Background(backgroundImage);
-            SpriteMotion spriteMotion = new SpriteMotion(this.gameWindow.getWidth(), this.gameWindow.getHeight(), 3);
-            SpriteSheet spriteSheet = new SpriteSheet(spriteImage, 5, 4);
+            final SpriteMotion spriteMotion = new SpriteMotion(this.gameWindow.getWidth(), this.gameWindow.getHeight(), 3);
+            final SpriteSheet spriteSheet = new SpriteSheet(spriteImage, 5, 4);
             final Sprite sprite = new FourDirctionalSprite(50, 50, spriteSheet, 0, 0);
 
 
@@ -83,7 +83,7 @@ public class BossFight {
                 @Override
                 public void updateWith(final UserInputs map) {
                     sprite.updateWith(map);
-                    InputDirection direction = InputDirection.getDirectionFrom(map);
+                    final InputDirection direction = InputDirection.getDirectionFrom(map);
                     spriteMotion.updatePosition(sprite, direction);
                 }
 
@@ -142,11 +142,8 @@ public class BossFight {
         return frame;
     }
 
-
     public static void main(final String[] args) {
         final BossFight bossFight = new BossFight();
         bossFight.loop();
     }
-
-
 }
